@@ -11,5 +11,5 @@ steps:
 
 substitutions:
   _GCP_PROJECT_ID: 'my-gcp-project'
-  _IMAGE_NAME: $BUILD_ID
+  _IMAGE_NAME:
   _VN_NAME: 'my-custom-vm'
