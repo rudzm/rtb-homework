@@ -50,4 +50,4 @@ jobs:
       - name: Deploy app with cloud build
         run: |-
           gcloud builds submit --config=cloudbuild/deploy.yaml \
-            --substitutions=_IMAGE_NAME="${{ env.APP_IMAGE_NAME }}",_VM_NAME="${{ vars.VM_NAME }}"_ZONE="${{ env.ZONE }}"
+            --substitutions=_IMAGE_NAME="${{ env.APP_IMAGE_NAME }}",_VM_NAME="${{ vars.VM_NAME }}",_ZONE="${{ env.ZONE }}"
