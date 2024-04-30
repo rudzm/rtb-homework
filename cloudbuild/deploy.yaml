@@ -1,0 +1,15 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'compute'
+      - 'ssh'
+      - '--command'
+      - |
+        'docker pull ${IMAGE_NAME} && \
+         docker run -d -p 5000:5000 ${IMAGE_NAME}'
+      - '${_VN_NAME}'
+
+substitutions:
+  _GCP_PROJECT_ID: 'my-gcp-project'
+  _IMAGE_NAME: $BUILD_ID
+  _VN_NAME: 'my-custom-vm'
