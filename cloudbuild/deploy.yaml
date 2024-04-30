@@ -15,6 +15,7 @@ serviceAccount: projects/${_GCP_PROJECT}/serviceAccounts/${_SA_NAME}@${_GCP_PROJ
 options:
   logging: CLOUD_LOGGING_ONLY
 substitutions:
+  _SA_NAME: ''
   _GCP_PROJECT: ''
   _REGION: ''
   _IMAGE_NAME: ''
