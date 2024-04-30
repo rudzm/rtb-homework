@@ -10,6 +10,8 @@ Zanim zaczniesz, upewnij się, że masz:
 
 1. **Utwórz i zainicjalizuj projekt w GCP**:
    - Utwórz nowy projekt w Google Cloud Platform lub użyj istniejącego.
+   - Nadaj włącz odpowiednie api.
+   - Nadaj uprawnienia dla domyślnego SA cloud build'a
 
 2. **Skonfiguruj Terraform**:
    - Utwórz katalog projektu i umieść pliki Terraform, w tym `main.tf`, `backend.tf`, `variables.tf`, i `terraform.tfvars`.
@@ -18,6 +20,6 @@ Zanim zaczniesz, upewnij się, że masz:
 
 3. **Skonfiguruj Github**
    - Utwórz sekrety `GCP_CREDENTIALS`, `GCP_PROJECT_ID`
-   - Utwórz zmienne `REGION`, `SA_NAME`, `VN_NAME`
+   - Utwórz zmienne `REGION`, `SA_NAME`, `VM_NAME`
 
 
