@@ -18,6 +18,11 @@ resource "google_compute_subnetwork" "custom_subnet" {
   ip_cidr_range = "10.0.0.0/24"
 }
 
+resource "google_service_account" "vm_service_account" {
+  account_id   = "vm-service-account"  # identyfikator konta usługi
+  display_name = "Service account for VM"
+}
+
 # Provisioning an E2 micro VM
 resource "google_compute_instance" "e2_micro_vm" {
   name         = var.vm_name
@@ -30,6 +35,11 @@ resource "google_compute_instance" "e2_micro_vm" {
     initialize_params {
       image = "debian-cloud/debian-11" # Choose your preferred image
     }
+  }
+
+  service_account {
+    email  = google_service_account.vm_service_account.email  # użycie konta usługi
+    scopes = ["cloud-platform"]  # pełne uprawnienia do GCP
   }
 
   network_interface {
@@ -67,4 +77,14 @@ resource "google_artifact_registry_repository" "my_registry" {
   project  = var.project_id  # ID projektu GCP
   location = var.region  # lokalizacja rejestru
   format   = "DOCKER"  # format rejestru, np. Docker
+}
+
+resource "google_artifact_registry_repository_iam_binding" "binding" {
+  project = google_artifact_registry_repository.my_registry.project
+  location = google_artifact_registry_repository.my_registry.location
+  repository = google_artifact_registry_repository.my_registry.name
+  role = "roles/artifactregistry.reader"
+  members = [
+    "serviceAccount:${google_service_account.vm_service_account.email}"
+  ]
 }
