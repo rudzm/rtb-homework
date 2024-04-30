@@ -29,11 +29,9 @@ resource "google_compute_instance" "e2_micro_vm" {
   machine_type = "e2-micro"
   zone         = "${var.region}-a"
 
-  metadata_startup_script = var.startup_script
-
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11" # Choose your preferred image
+      image = "projects/cos-cloud/global/images/cos-stable-109-17800-147-60" # Choose your preferred image
     }
   }
 

@@ -31,15 +31,3 @@ variable "artifact_registry_name" {
   type        = string
   default     = "my-artifact-registry"  # zmień według potrzeb
 }
-
-variable "startup_script" {
-  description = "Skrypt rozruchowy do instalacji Dockera"
-  type        = string
-  default     = <<EOF
-#!/bin/bash
-sudo apt-get update
-sudo apt-get install -y docker.io
-sudo systemctl enable docker
-sudo systemctl start docker
-EOF
-}

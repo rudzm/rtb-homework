@@ -5,11 +5,17 @@ steps:
       - 'ssh'
       - '--command'
       - |
-        'docker pull ${IMAGE_NAME} && \
-         docker run -d -p 5000:5000 ${IMAGE_NAME}'
+        'docker stop $(docker ps -a -q) && \
+         docker pull ${_IMAGE_NAME} && \
+         docker run -d -p 5000:5000 ${_IMAGE_NAME}'
       - '${_VN_NAME}'
-
+      - -- zone
+      - ${_REGION}-a
+serviceAccount: projects/${_GCP_PROJECT}/serviceAccounts/${_SA_NAME}@${_GCP_PROJECT}.iam.gserviceaccount.com
+options:
+  logging: CLOUD_LOGGING_ONLY
 substitutions:
-  _GCP_PROJECT_ID: 'my-gcp-project'
-  _IMAGE_NAME:
+  _GCP_PROJECT: ''
+  _REGION: ''
+  _IMAGE_NAME: ''
   _VN_NAME: 'my-custom-vm'
