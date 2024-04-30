@@ -35,6 +35,10 @@ resource "google_compute_instance" "e2_micro_vm" {
     }
   }
 
+  metadata = {
+    gce-container-declaration = "spec:\n  containers:\n  - name: dumy\n    image: dummy\n    stdin: false\n    tty: false\n  restartPolicy: Always\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
+  }
+
   service_account {
     email  = google_service_account.vm_service_account.email  # użycie konta usługi
     scopes = ["cloud-platform"]  # pełne uprawnienia do GCP
@@ -64,7 +68,7 @@ resource "google_compute_firewall" "allow_custom_port" {
 
   allow {
     protocol = "tcp"
-    ports    = [var.allowed_port]
+    ports    = var.allowed_port
   }
 
   source_ranges = ["0.0.0.0/0"] # Allows connections from anywhere

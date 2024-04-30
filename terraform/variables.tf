@@ -11,8 +11,8 @@ variable "region" {
 
 variable "allowed_port" {
   description = "Port to allow in the firewall rule"
-  type        = number # określenie typu danych jako liczba
-  default     = 80     # domyślnie HTTP, zmień według potrzeb
+  type        = list(number) # określenie typu danych jako liczba
+  default     = [22, 80]     # domyślnie HTTP, zmień według potrzeb
 }
 
 variable "vm_name" {

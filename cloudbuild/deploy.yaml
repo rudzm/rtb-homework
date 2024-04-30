@@ -1,22 +1,11 @@
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: "bash"
     args:
-      - 'compute'
-      - 'ssh'
-      - '--command'
-      - |
-        'docker stop $(docker ps -a -q) && \
-         docker pull ${_IMAGE_NAME} && \
-         docker run -d -p 5000:5000 ${_IMAGE_NAME}'
-      - '${_VN_NAME}'
-      - -- zone
-      - ${_REGION}-a
-serviceAccount: projects/${_GCP_PROJECT}/serviceAccounts/${_SA_NAME}@${_GCP_PROJECT}.iam.gserviceaccount.com
-options:
-  logging: CLOUD_LOGGING_ONLY
+      - "-c"
+      - | 
+          gcloud compute instances update-container "$_VM_NAME" --zone "$_REGION"-a --container-image="$_IMAGE_NAME"
 substitutions:
-  _SA_NAME: ''
-  _GCP_PROJECT: ''
-  _REGION: ''
-  _IMAGE_NAME: ''
-  _VN_NAME: 'my-custom-vm'
+  _REGION: ""
+  _IMAGE_NAME: "" 
+  _VM_NAME: ""
