@@ -45,7 +45,7 @@ jobs:
 
       - name: Get VM zone and set as var
         run: |
-          echo ZONE=$(gcloud compute instances list ${{ vars.VM_NAME }} --format 'csv[no-heading](zone)')
+          echo ZONE=$(gcloud compute instances list ${{ vars.VM_NAME }} --format 'csv[no-heading](zone)') >> $GITHUB_ENV
 
       - name: Deploy app with cloud build
         run: |-
