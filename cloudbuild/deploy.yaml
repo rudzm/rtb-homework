@@ -4,8 +4,8 @@ steps:
     args:
       - "-c"
       - | 
-          gcloud compute instances update-container "$_VM_NAME" --zone "$_REGION"-a --container-image="$_IMAGE_NAME"
+          gcloud compute instances update-container "$_VM_NAME" --container-image="$_IMAGE_NAME" --zone "$_ZONE"
 substitutions:
-  _REGION: ""
+  _ZONE: ""
   _IMAGE_NAME: "" 
   _VM_NAME: ""
