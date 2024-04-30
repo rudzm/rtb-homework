@@ -1,0 +1,5 @@
+app/bin
+app/lib
+pyvenv.cfg
+terraform/.terraform
+terraform/.terraform.lock.hcl
