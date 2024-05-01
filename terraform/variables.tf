@@ -29,5 +29,5 @@ variable "backend_bucket_name" {
 variable "artifact_registry_name" {
   description = "Nazwa rejestru artefaktów Google"
   type        = string
-  default     = "my-artifact-registry"  # zmień według potrzeb
+  default     = "my-artifact-registry" # zmień według potrzeb
 }

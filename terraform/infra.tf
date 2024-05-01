@@ -19,7 +19,7 @@ resource "google_compute_subnetwork" "custom_subnet" {
 }
 
 resource "google_service_account" "vm_service_account" {
-  account_id   = "vm-service-account"  # identyfikator konta usługi
+  account_id   = "vm-service-account" # identyfikator konta usługi
   display_name = "Service account for VM"
 }
 
@@ -40,8 +40,8 @@ resource "google_compute_instance" "e2_micro_vm" {
   }
 
   service_account {
-    email  = google_service_account.vm_service_account.email  # użycie konta usługi
-    scopes = ["cloud-platform"]  # pełne uprawnienia do GCP
+    email  = google_service_account.vm_service_account.email # użycie konta usługi
+    scopes = ["cloud-platform"]                              # pełne uprawnienia do GCP
   }
 
   network_interface {
@@ -75,17 +75,17 @@ resource "google_compute_firewall" "allow_custom_port" {
 }
 
 resource "google_artifact_registry_repository" "my_registry" {
-  repository_id     = var.artifact_registry_name  # użyjemy zmiennej dla nazwy rejestru
-  project  = var.project_id  # ID projektu GCP
-  location = var.region  # lokalizacja rejestru
-  format   = "DOCKER"  # format rejestru, np. Docker
+  repository_id = var.artifact_registry_name # użyjemy zmiennej dla nazwy rejestru
+  project       = var.project_id             # ID projektu GCP
+  location      = var.region                 # lokalizacja rejestru
+  format        = "DOCKER"                   # format rejestru, np. Docker
 }
 
 resource "google_artifact_registry_repository_iam_binding" "binding" {
-  project = google_artifact_registry_repository.my_registry.project
-  location = google_artifact_registry_repository.my_registry.location
+  project    = google_artifact_registry_repository.my_registry.project
+  location   = google_artifact_registry_repository.my_registry.location
   repository = google_artifact_registry_repository.my_registry.name
-  role = "roles/artifactregistry.reader"
+  role       = "roles/artifactregistry.reader"
   members = [
     "serviceAccount:${google_service_account.vm_service_account.email}"
   ]
